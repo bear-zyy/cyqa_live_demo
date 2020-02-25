@@ -26,6 +26,9 @@ dependencies:
 #  flutter_ijkplayer:
 #    path: ../cyqa_live_demo/customPackages/flutter_ijkplayer-master
   flutter_ijkplayer: ^0.3.5
+  flutter_rtmp_publisher: ^0.0.1
+#  camera: ^0.5.2
+#  permission_handler: ^3.2.1
 
 dev_dependencies:
   flutter_test:

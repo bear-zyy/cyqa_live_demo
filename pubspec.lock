@@ -48,6 +48,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.3.5+1"
+  flutter_rtmp_publisher:
+    dependency: "direct main"
+    description:
+      name: flutter_rtmp_publisher
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
