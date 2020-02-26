@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rtmp_publisher/flutter_rtmp_publisher.dart';
 //import 'package:camera/camera.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter/services.dart';
+import 'dart:io';
 
 class pushPageVC extends StatefulWidget {
 
@@ -23,11 +26,8 @@ class _pushPageVCState extends State<pushPageVC>{
     // TODO: implement initState
     super.initState();
 
-//    initPermission();
-//    initCamrea();
 
   }
-
 
 
   @override
@@ -153,7 +153,7 @@ class _pushPageVCState extends State<pushPageVC>{
 //    }
 //  }
 
-  startPushStream(){
+  startPushStream() async{
 
     if(_pushStreamUrlTextC.text.length == 0){
 
@@ -171,6 +171,66 @@ class _pushPageVCState extends State<pushPageVC>{
       );
 
       return;
+    }
+
+
+    if(Platform.isAndroid) {
+      Map<PermissionGroup, PermissionStatus> permissions = await PermissionHandler().requestPermissions([PermissionGroup.camera , PermissionGroup.microphone]);
+
+      print("permissions ==== ${permissions}");
+
+      PermissionStatus cameraPermission = await PermissionHandler().checkPermissionStatus(PermissionGroup.camera);
+
+      PermissionStatus microphonePermission = await PermissionHandler().checkPermissionStatus(PermissionGroup.microphone);
+
+      print("cameraPermission ===  ${cameraPermission.value}");
+
+      if(cameraPermission.value != 2){
+        await PermissionHandler().openAppSettings();
+      }
+
+      if(microphonePermission.value != 2){
+        await PermissionHandler().openAppSettings();
+      }
+
+      PermissionStatus camera = await PermissionHandler().checkPermissionStatus(PermissionGroup.camera);
+      if(camera.value != 2){//执行
+
+        showDialog(context:context , builder: (_)=> AlertDialog(
+          title: Text("提示"),
+          content: Text("需要获取摄像头权限"),
+          actions: <Widget>[
+            FlatButton(onPressed: (){
+              Navigator.of(context).pop();
+
+            },
+              child: Text("确定"),),
+          ],
+        ),
+        );
+
+        return;
+      }
+
+      PermissionStatus microphone = await PermissionHandler().checkPermissionStatus(PermissionGroup.microphone);
+
+      if(microphone.value != 2){//执行
+
+        showDialog(context:context , builder: (_)=> AlertDialog(
+          title: Text("提示"),
+          content: Text("需要获取麦克风权限"),
+          actions: <Widget>[
+            FlatButton(onPressed: (){
+              Navigator.of(context).pop();
+
+            },
+              child: Text("确定"),),
+          ],
+        ),
+        );
+
+        return;
+      }
     }
 
     RTMPPublisher.streamVideo(_pushStreamUrlTextC.text);
