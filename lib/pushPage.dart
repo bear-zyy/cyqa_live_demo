@@ -1,23 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rtmp_publisher/flutter_rtmp_publisher.dart';
-//import 'package:camera/camera.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/services.dart';
-import 'dart:io';
 
 class pushPageVC extends StatefulWidget {
 
-//  pushPageVC(this.cameras);
-//  List<CameraDescription> cameras;
   @override
   _pushPageVCState createState() => new _pushPageVCState();
 }
 
 class _pushPageVCState extends State<pushPageVC>{
-
-//  CameraController controller;
-//
-//  CameraLensDirection currentDirection = CameraLensDirection.back;
 
   TextEditingController _pushStreamUrlTextC = new TextEditingController();
 
@@ -35,52 +27,6 @@ class _pushPageVCState extends State<pushPageVC>{
     // TODO: implement dispose
     super.dispose();
   }
-
-//  initCamrea()async{
-//    Future.delayed(Duration(milliseconds: 300)).then((e){
-//      for (CameraDescription cameraDescription in widget.cameras) {
-//        if(cameraDescription.lensDirection == currentDirection){
-//          onNewCameraSelected(cameraDescription);
-//          return;
-//        }
-//      }
-//    });
-//  }
-
-//  void onNewCameraSelected(CameraDescription cameraDescription) async {
-//
-//    print("是要走这里才能打开摄像头吧 ${cameraDescription}");
-//
-//    if (controller != null) {
-//      await controller.dispose();
-//    }
-//    controller = CameraController(
-//      cameraDescription,
-//      ResolutionPreset.low,
-//      enableAudio: true,
-//    );
-//
-//    // If the controller is updated then update the UI.
-//    controller.addListener(() {
-//      if (mounted) setState(() {});
-//      if (controller.value.hasError) {
-////        showInSnackBar('Camera error ${controller.value.errorDescription}');
-//        print("Camera error ${controller.value.errorDescription}");
-//      }
-//    });
-//
-//    try {
-//      await controller.initialize();
-//    } on CameraException catch (e) {
-////      _showCameraException(e);
-//      print("${e}");
-//    }
-//
-//    if (mounted) {
-//      setState(() {});
-//    }
-//  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -107,16 +53,6 @@ class _pushPageVCState extends State<pushPageVC>{
                 ),
               ),
             ),
-//            Padding(
-//              padding: EdgeInsets.only(top: 0 , left: 0 ,right: 0),
-//              child: Container(
-//                height: 400,
-//                width: double.infinity,
-//                color: Colors.black,
-//                child: _cameraPreviewWidget(),
-//              ),
-//            ),
-
             Padding(
               padding: EdgeInsets.only(top: 20),
               child: GestureDetector(
@@ -130,28 +66,6 @@ class _pushPageVCState extends State<pushPageVC>{
       ),
     );
   }
-
-  /// Display the preview from the camera (or a message if the preview is not available).
-//  Widget _cameraPreviewWidget() {
-//    if (controller == null || !controller.value.isInitialized) {
-//      return const Center(
-//        child: Text(
-//          '初始化相机中',
-//          style: TextStyle(
-//            color: Colors.white,
-//            fontSize: 24.0,
-//            fontWeight: FontWeight.w900,
-//          ),
-//        ),
-//      );
-//    } else {
-////      return CameraPreview(controller);
-//      return AspectRatio(
-//        aspectRatio:controller.value.aspectRatio,//controller.value.aspectRatio
-//        child: CameraPreview(controller),
-//      );
-//    }
-//  }
 
   startPushStream() async{
 
@@ -173,8 +87,6 @@ class _pushPageVCState extends State<pushPageVC>{
       return;
     }
 
-
-    if(Platform.isAndroid) {
       Map<PermissionGroup, PermissionStatus> permissions = await PermissionHandler().requestPermissions([PermissionGroup.camera , PermissionGroup.microphone]);
 
       print("permissions ==== ${permissions}");
@@ -231,7 +143,7 @@ class _pushPageVCState extends State<pushPageVC>{
 
         return;
       }
-    }
+
 
     RTMPPublisher.streamVideo(_pushStreamUrlTextC.text);
 
