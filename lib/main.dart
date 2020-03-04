@@ -3,6 +3,7 @@ import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
 import 'pushPage.dart';
 import 'pullPage.dart';
 import 'classPage.dart';
+import 'canvasPage.dart';
 //import 'package:camera/camera.dart';
 import 'package:flutter/services.dart';
 
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         "pushPageVC":(context)=>pushPageVC(),
         "pullPageVC":(context)=>pullPageVC(),
         "classPageVC":(context)=>classPageVC(),
+        "canvasPage":(context)=>canvasPage(),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -104,6 +106,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextStyle(color: Colors.black , fontSize: 20 , fontWeight: FontWeight.w500),),
               ),
             ),
+            Padding(
+              padding: EdgeInsets.only(top: 40),
+              child: GestureDetector(
+                onTap: jumpToCanvasPage,
+                child: Text("画板页面" ,
+                  style: TextStyle(color: Colors.black , fontSize: 20 , fontWeight: FontWeight.w500),),
+              ),
+            ),
           ],
         ),
       ),
@@ -111,6 +121,9 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void jumpToCanvasPage(){
+    Navigator.pushNamed(context, "canvasPage");
+  }
 
   void jumpToPullPage(){
     //
