@@ -26,6 +26,8 @@ class _pushPageVCState extends State<pushPageVC>{
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+    _pushStreamUrlTextC.dispose();
+
   }
 
   @override

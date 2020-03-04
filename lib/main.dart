@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
 import 'pushPage.dart';
 import 'pullPage.dart';
+import 'classPage.dart';
 //import 'package:camera/camera.dart';
 import 'package:flutter/services.dart';
 
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "pushPageVC":(context)=>pushPageVC(),
         "pullPageVC":(context)=>pullPageVC(),
+        "classPageVC":(context)=>classPageVC(),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -94,6 +96,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextStyle(color: Colors.black , fontSize: 20 , fontWeight: FontWeight.w500),),
               ),
             ),
+            Padding(
+              padding: EdgeInsets.only(top: 40),
+              child: GestureDetector(
+                onTap: jumpToClassPage,
+                child: Text("课堂播放demo" ,
+                  style: TextStyle(color: Colors.black , fontSize: 20 , fontWeight: FontWeight.w500),),
+              ),
+            ),
           ],
         ),
       ),
@@ -102,14 +112,19 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
-  jumpToPullPage(){
+  void jumpToPullPage(){
     //
     Navigator.pushNamed(context, "pullPageVC");
   }
 
-  jumpToPushPage(){
+  void jumpToPushPage(){
 
     Navigator.pushNamed(context, "pushPageVC");
+  }
+
+  void jumpToClassPage(){
+
+    Navigator.pushNamed(context, "classPageVC");
   }
 
 

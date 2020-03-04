@@ -65,6 +65,8 @@ class _pullPageVCState extends State<pullPageVC>{
 
     controller.dispose();
 
+    _setUrlTextC.dispose();
+
     super.dispose();
 
   }
