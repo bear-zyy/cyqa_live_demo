@@ -123,6 +123,7 @@ class _pullPageVCState extends State<pullPageVC>{
           ],
         ),
       ),
+      resizeToAvoidBottomPadding: false,
     );
   }
 

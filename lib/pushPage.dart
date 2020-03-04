@@ -66,6 +66,7 @@ class _pushPageVCState extends State<pushPageVC>{
           ],
         ),
       ),
+      resizeToAvoidBottomPadding: false,
     );
   }
 

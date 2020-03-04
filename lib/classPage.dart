@@ -55,6 +55,9 @@ class _classPageVCState extends State<classPageVC>{
     Stream<IjkStatus> ijkStatusStream = controller.ijkStatusStream;
     ijkStatusStream.listen((e){
 
+      if(!mounted){
+        return;
+      }
       setState(() {
         playState = e;
       });
@@ -80,9 +83,12 @@ class _classPageVCState extends State<classPageVC>{
   @override
   void dispose() {
     // TODO: implement dispose
-    super.dispose();
 
     controller.dispose();
+
+    if(_timer != null){
+      _timer.cancel();
+    }
 
     urlTextControler.dispose();
 
@@ -92,6 +98,8 @@ class _classPageVCState extends State<classPageVC>{
 
     ]);
 
+    super.dispose();
+
   }
 
 
@@ -99,6 +107,9 @@ class _classPageVCState extends State<classPageVC>{
     VideoInfo info = await controller.getVideoInfo();
 
     if(info.duration == 0.0){//直播
+      if(!mounted){
+        return;
+      }
       setState(() {
         isLive = true;
       });
@@ -137,6 +148,9 @@ class _classPageVCState extends State<classPageVC>{
           string = string + "${s}";
         }
 
+        if(!mounted){
+          return;
+        }
         setState(() {
           liveTimeString = string;
         });
@@ -157,8 +171,6 @@ class _classPageVCState extends State<classPageVC>{
   Widget build(BuildContext context) {
 
     mediaQuery = MediaQueryData.fromWindow(window);
-
-    print("这个地方执行几次 ？ ${mediaQuery.size}");
 
     return Scaffold(
       body: Container(
