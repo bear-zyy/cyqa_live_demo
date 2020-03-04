@@ -31,28 +31,22 @@ class _pullPageVCState extends State<pullPageVC>{
     ijkStatusStream.listen((e){
       print("ijkStatusStream  ========================  {$e}");
 
+      if(!mounted){
+        return;
+      }
       setState(() {
         playState = e;
       });
 
       if(e == IjkStatus.preparing){//准备中
-
       }
       else if(e == IjkStatus.prepared){//准备完成
-
       }
       else if(e == IjkStatus.playing){//播放
-        setState(() {
-
-        });
       }
       else if(e == IjkStatus.pause){//暂停
-        setState(() {
-
-        });
       }
       else if(e == IjkStatus.error){//播放错误
-
       }
     });
 
