@@ -5,6 +5,7 @@ import 'pullPage.dart';
 import 'classPage.dart';
 import 'canvasPage.dart';
 import 'uploadImagePage.dart';
+import 'canvasTest.dart';
 //import 'package:camera/camera.dart';
 import 'package:flutter/services.dart';
 
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         "classPageVC":(context)=>classPageVC(),
         "canvasPage":(context)=>canvasPage(),
         "uploadImagePage":(context)=>uploadImagePage(),
+        "canvasTest":(context)=>canvasTest(),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -119,6 +121,14 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: EdgeInsets.only(top: 40),
               child: GestureDetector(
+                onTap: jumpToCanvasTest,
+                child: Text("画板test" ,
+                  style: TextStyle(color: Colors.black , fontSize: 20 , fontWeight: FontWeight.w500),),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 40),
+              child: GestureDetector(
                 onTap: uploadImageFunction,
                 child: Text("上传图片" ,
                   style: TextStyle(color: Colors.black , fontSize: 20 , fontWeight: FontWeight.w500),),
@@ -137,6 +147,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void jumpToCanvasPage(){
     Navigator.pushNamed(context, "canvasPage");
+  }
+
+  void jumpToCanvasTest(){
+    Navigator.pushNamed(context, "canvasTest");
   }
 
   void jumpToPullPage(){
